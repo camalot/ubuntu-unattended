@@ -106,7 +106,7 @@ done
 
 if [ -f /etc/timezone ]; then
   timezone=`cat /etc/timezone`
-elif [ -h /etc/localtime]; then
+elif [ -h /etc/localtime ]; then
   timezone=`readlink /etc/localtime | sed "s/\/usr\/share\/zoneinfo\///"`
 else
   checksum=`md5sum /etc/localtime | cut -d' ' -f1`
@@ -205,7 +205,7 @@ sed -i -r 's/timeout\s+[0-9]+/timeout 1/g' $tmp/iso_new/isolinux/isolinux.cfg
 if [ $ub1604 == "yes" ]; then
    late_command="apt-install wget; in-target wget --no-check-certificate -O /home/$username/start.sh https://github.com/netson/ubuntu-unattended/raw/master/start.sh ;\
      in-target chmod +x /home/$username/start.sh ;"
-else 
+else
    late_command="chroot /target wget -O /home/$username/start.sh https://github.com/netson/ubuntu-unattended/raw/master/start.sh ;\
      chroot /target chmod +x /home/$username/start.sh ;"
 fi
